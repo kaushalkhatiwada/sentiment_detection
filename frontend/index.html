@@ -1,0 +1,29 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sentiment Detection</title>
+</head>
+<body>
+    <h1>Sentiment Detection</h1>
+    <textarea id="text" rows="4" cols="50"></textarea><br><br>
+    <button onclick="predict()">Predict Feeling</button>
+    <h2 id="result"></h2>
+
+    <script>
+        async function predict() {
+            const text = document.getElementById('text').value;
+            const response = await fetch('http://localhost:5000/detect', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ text: text })
+            });
+            const result = await response.json();
+            document.getElementById('result').innerText = 'Prediction: ' + result.label;
+        }
+    </script>
+</body>
+</html>

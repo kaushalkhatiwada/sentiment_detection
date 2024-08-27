@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentiment-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sentiment-backend
+  template:
+    metadata:
+      labels:
+        app: sentiment-backend
+    spec:
+      containers:
+      - name: sentiment-backend
+        image: kaushal11/sentiment-backend
+        ports:
+        - containerPort: 8000
